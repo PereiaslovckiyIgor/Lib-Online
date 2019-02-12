@@ -1,0 +1,127 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Page Content
+================================================== -->
+
+    <!--
+        <div class="span3 sidebar page-left-sidebar">
+
+            <div class="input-append">
+                <form action="#">
+                    <input id="appendedInputButton" size="16" type="text" placeholder="Поиск"><button class="btn" type="button"><i class="icon-search"></i></button>
+                </form>
+            </div>
+
+            <h5 class="title-bg">Жанры</h5>
+            <ul class="post-category-list">
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Фентези и Фантастика</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>История</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Классика</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Прикоючения</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Наука и образование</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Ужасы</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Философия</a></li>
+            </ul>
+        </div>End sidebar column -->
+    <!-- Page Content
+    ================================================== -->
+    <div class="span6">
+        <!--Begin page content column-->
+        <h2 class="title-bg">Самые читаемые</h2>
+        <div class="row clearfix">
+
+            <ul class="gallery-post-grid holder">
+                @for (var i = 0; i < 6; i++)
+                {
+                    <li class="span2 gallery-item" data-id="id-1" data-type="illustration">
+                        @*@<span class="gallery-hover-6col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="~/img/Sherlock.jpg" class="item-zoom-link lightbox" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>*@
+                        <a asp-controller="BooksDescription" asp-action="BooksDescription"><img src="~/img/Sherlock.jpg" alt="Gallery"></a>
+                        <span class="project-details"><a asp-controller="BooksDescription" asp-action="BooksDescription">Шерлок Холмс</a>Казнь Шерлока Холмса</span>
+                    </li>
+                }
+            </ul>
+            <h5><a href="#" class="pull-right"><i class="icon-th"></i>Полностью</a></h5>
+        </div>
+
+
+        <h2 class="title-bg">Новые</h2>
+        <div class="row clearfix">
+            <ul class="gallery-post-grid holder">
+                @for (var i = 0; i < 6; i++)
+                {
+                    <li class="span2 gallery-item" data-id="id-1" data-type="illustration">
+                        @*@<span class="gallery-hover-6col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="~/img/Sherlock.jpg" class="item-zoom-link lightbox" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>*@
+                        <a asp-controller="BooksDescription" asp-action="BooksDescription"><img src="~/img/Sherlock.jpg" alt="Gallery"></a>
+                        <span class="project-details"><a asp-controller="BooksDescription" asp-action="BooksDescription">Шерлок Холмс</a>Казнь Шерлока Холмса</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div> <!--End page content column-->
+    <!-- Page Right Sidebar
+    ================================================== -->
+
+    <div class="span3 sidebar page-rigth-sidebar">
+        <!--User Login-->
+        <h5 class="title-bg">Авторизация</h5>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#singIn" data-toggle="tab">Вход</a></li>
+            <li><a href="#registration" data-toggle="tab">Регистрация</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="singIn">
+                <ul>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-user"></i></span><input id="prependedInput" size="16" type="text" placeholder="Логин">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-lock"></i></span><input id="appendedPrependedInput" size="16" type="text" placeholder="Пароль">
+                    </div>
+                    <button class="btn btn-small btn-inverse" type="button">Войти</button>
+
+                </ul>
+            </div>
+            <div class="tab-pane" id="registration">
+                <ul>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-user"></i></span><input id="regLogin" size="16" type="text" placeholder="Логин">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-lock"></i></span><input id="regPass" size="16" type="text" placeholder="Пароль">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-lock"></i></span><input id="regRepeatedPass" size="16" type="text" placeholder="Повторите пароль">
+                    </div>
+                    <button class="btn btn-small btn-inverse" type="button">Зарегестрироваться</button>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <!--Latest News-->
+        <h5 class="title-bg">Обновления</h5>
+        <ul class="span2 popular-posts">
+            @for (var i = 0; i < 3; i++)
+            {
+                <li>
+                    <a asp-controller="BooksDescription" asp-action="BooksDescription"><img src="~/img/Sherlock.jpg" alt="Popular Post"></a>
+                    <h6><a asp-controller="BooksDescription" asp-action="BooksDescription">Шерлок Холмс<br>Казнь Шерлока Холмса</a></h6>
+                    <em>Добавленно 08/02/19</em>
+                </li>
+            }
+        </ul>
+
+    </div><!-- End sidebar column -->
