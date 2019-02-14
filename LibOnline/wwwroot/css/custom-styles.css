@@ -260,7 +260,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-	.project-details {width: 250px; text-align: center}
+	.project-details {width: 95%; text-align: center}
 	.gallery-post-grid {text-align: center}
 	.project-details {margin-left:auto; margin-right: auto;}
 	.gallery {text-align: center; }
@@ -653,7 +653,7 @@ a.accordion-toggle{background: #f5f5f5;}
 .nav-tabs li.active a{background:#f8f8f8;}
 
 @media only screen and  (max-width: 767px) {
-	.btn {margin-bottom: 20px;}
+	.btn {margin-bottom: 10px;}
 }
 
 .left {float: left;}
@@ -763,4 +763,43 @@ a.accordion-toggle{background: #f5f5f5;}
 /* Mobile Portrait Size to Tablet Portrait Size */
 @media only screen and  (max-width: 767px) {
 	.the-icons li {float: none; width: 100%; line-height: 25px;}	
+}
+
+
+/*------------------------------------------------------------------------------*/
+
+
+.project-details-page {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: Arial;
+    font-size: 18px;
+    font-style: normal;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.title-bg-white {
+    background-color: #FFFFFF!important;
+}
+
+.btn-group-margins {
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    margin-top: 50px;
+    margin-bottom:20%;
+}
+
+.search-query-page {
+    width:70px;
+}
+
+
+@media only screen and (max-width:500px) {
+    .breadcrumb ol{
+        display:none
+    }
+    .search-query input {
+        width: 70px;
+    }
 }

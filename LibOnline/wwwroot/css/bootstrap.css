@@ -4702,21 +4702,23 @@ input[type="submit"].btn.btn-mini {
 }
 
 .breadcrumb {
-  padding: 8px 15px;
-  margin: 0 0 20px;
-  list-style: none;
-  background-color: #f5f5f5;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+    padding: 3px 15px;
+    margin: 0 0 20px;
+    list-style: none;
+    /*background-color: #f5f5f5;*/
+    background-color: transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
-.breadcrumb li {
-  display: inline-block;
-  *display: inline;
-  text-shadow: 0 1px 0 #ffffff;
-  *zoom: 1;
-}
+    .breadcrumb li {
+        display: inline-block;
+        *display: inline;
+        /*text-shadow: 0 1px 0 #ffffff;*/
+        text-shadow: 0 1px 0 transparent;
+        *zoom: 1;
+    }
 
 .breadcrumb .divider {
   padding: 0 5px;
