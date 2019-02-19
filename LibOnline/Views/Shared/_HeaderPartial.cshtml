@@ -8,17 +8,21 @@
     </div>
 
 
-    <!-- Main Navigation -->
-    <div class="navigation">
+     @*Main Navigation*@
+    <nav class="navigation">
 
         <div class="navbar">
 
             <ul class="nav">
-                <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
-                <li><a asp-controller="Home" asp-action="About">Топ 100</a></li>
-                <li><a asp-controller="Home" asp-action="About">Новое</a></li>
+                <li class="active"><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                <li><a asp-controller="UserPage" asp-action="UserPage">Избанное</a></li>
+                <li class="dropdown">
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories">Топ 100</a></li>
+                <li><a asp-controller="BooksCategories" asp-action="BooksCategories">Новое</a></li>
                 <li><a asp-controller="Login" asp-action="Login">Вход</a></li>
+                <li><a asp-controller="Login" asp-action="LogOut"><b>(username)</b> Выход</a></li>
             </ul>
         </div>
-    </div>
+    </nav> 
+
 </div><!-- End Header -->

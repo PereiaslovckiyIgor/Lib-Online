@@ -790,16 +790,22 @@ a.accordion-toggle{background: #f5f5f5;}
     margin-bottom:20%;
 }
 
-.search-query-page {
-    width:70px;
+
+.pageNamber {
+    margin-left:90%;
+    color:gray;
 }
 
 
+.img_userPage {
+    width: 200px;
+    height: 300px;
+}
+
 @media only screen and (max-width:500px) {
-    .breadcrumb ol{
-        display:none
-    }
-    .search-query input {
-        width: 70px;
+
+    .img_userPage {
+        width: 100%;
+        height: 100%;
     }
 }
