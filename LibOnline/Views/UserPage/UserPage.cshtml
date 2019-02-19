@@ -17,9 +17,16 @@
         <div class="post-summary-footer"    >
             <ul class="post-data-3">
                 <li><i class="icon-calendar"></i> 09/02/19</li>
-                <li><i class="icon-user"></i> <a href="#">Имя Автора</a></li>
-                <li><i class="icon-comment"></i> <a href="#">5 Отзывов</a></li>
-                <li><i class="icon-tags"></i> <a href="#">Детектив</a>, <a href="#">Приключения</a></li>
+                <li><i class="icon-user"></i> 
+                    <a asp-controller="BooksCategories" asp-action="BooksCategories">Имя Автора</a>
+                </li>
+                <li><i class="icon-comment"></i> 
+                    <a asp-controller="BooksDescription" asp-action="BooksDescription" asp-fragment="comments">5 Отзывов</a>
+                </li>
+                <li><i class="icon-tags"></i> 
+                    <a asp-controller="BooksCategories" asp-action="BooksCategories">Детектив</a>, 
+                    <a asp-controller="BooksCategories" asp-action="BooksCategories">Приключения</a>
+                </li>
             </ul>
         </div>
     </article>
