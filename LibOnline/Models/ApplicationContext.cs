@@ -8,7 +8,7 @@ namespace LibOnline.Models
 {
     public class ApplicationContext:DbContext
     {
-        public DbSet<Categories.CategoryImage> CategoryImages { get; set; }
+        public DbSet<Categories.AllCategories> AllCategories { get; set; }
 
         public ApplicationContext()
         {

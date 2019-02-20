@@ -8,7 +8,7 @@ namespace LibOnline.Controllers
 {
     public class BooksCategoriesController : Controller
     {
-        public IActionResult BooksCategories()
+        public IActionResult BooksCategories(int idCategory)
         {
             return View();
         }

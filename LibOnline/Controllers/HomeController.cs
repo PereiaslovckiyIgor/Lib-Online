@@ -15,17 +15,19 @@ namespace LibOnline.Controllers
 
         public IActionResult Index()
         {
-            //List<CategoryImage> list = new List<CategoryImage>();
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    list = db.CategoryImages.FromSql("EXECUTE [library].[CategoriesImagesSelect]").ToList();
-            //    list.ForEach(i=>i.UpdateImgPath());
-            //}//using
-
-
-            //ViewBag.CategoryImages = list;
             return View();
         }//Index
+
+
+        public JsonResult GetAllCategories()
+        {
+            List<AllCategories> list = new List<AllCategories>();
+            using (ApplicationContext db = new ApplicationContext())
+                list = db.AllCategories.FromSql("EXECUTE [general].[GetAllCategories]").ToList();
+
+            return Json(list);
+        }//GetAllCategories
+
 
         public IActionResult About()
         {

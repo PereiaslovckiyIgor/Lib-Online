@@ -7,23 +7,11 @@ using System.Threading.Tasks;
 
 namespace LibOnline.Models.Categories
 {
-    public class CategoryImage
+    public class AllCategories
     {
         // Поля для обьекта из процедуры
         [Key]
         public int IdCategory { get; set; }
         public string CategoryName { get; set; }
-        public string ImagePath { get; set; }
-
-
-        // Локальный путь к папке с файлом, инициируется конструктором
-        private string lockalPath = @"/images/Categiries/";
-
-        public void UpdateImgPath()
-        {
-            ImagePath = lockalPath + ImagePath;
-        }//UpdateImgPath
-
-
     }//CategoryImage
 }//CategoryImage

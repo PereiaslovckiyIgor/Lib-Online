@@ -8,14 +8,34 @@
         </div>
 
         <h5 class="title-bg">Жанры</h5>
-        <ul class="post-category-list">
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Фентези и Фантастика</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>История</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Классика</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Прикоючения</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Наука и образование</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Ужасы</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Философия</a></li>
-            <li><a asp-controller="BooksCategories" asp-action="BooksCategories"><i class="icon-plus-sign"></i>Детектив</a></li>
+        <ul class="post-category-list" id="ulAllCategories">
+            @*TO DO - НЕ ЗАБЫТЬ УДАЛИТЬ ПРИМЕР!!!*@
+            @*<li><a href="#"><i class="icon-plus-sign"></i>HOME</a></li>*@
         </ul>
     </div><!-- End sidebar column -->
+
+
+
+    <script>
+    $(document).ready(function () {
+        $.ajax({
+            // Для обращение к методам одного контроллера из любого друго
+            url: '@Url.Content("~/Home/GetAllCategories")',
+            success: function (result) {
+                debugger;
+                RenderCategoriesList(result);
+            },
+        });
+
+        function RenderCategoriesList(result) {
+            debugger;
+            var categoriesHTML = '';
+            $.each(result, function () {
+                var idCat = this.idCategory;
+                categoriesHTML += '<li><a href="/BooksCategories/BooksCategories?idCategory=' + this.idCategory +'"><i class="icon-plus-sign"></i>' + this.categoryName + '</a></li>';
+                });
+            $('#ulAllCategories').html(categoriesHTML);
+        }//RenderCategoriesList
+
+    });// document.ready
+    </script>
