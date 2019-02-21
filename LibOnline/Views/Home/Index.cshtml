@@ -1,9 +1,10 @@
-﻿@{
+﻿@using LibOnline.Models.BooksCategories;
+@{
     ViewData["Title"] = "Home Page";
 }
 
 @Html.Partial("_CategoriesPartail")
-
+@*http://coderhs.com/archive/raty_star*@
 <!-- Page Content
 ================================================== -->
 <div class="span6">
@@ -12,13 +13,32 @@
     <div class="row clearfix">
 
         <ul class="gallery-post-grid holder">
-            @for (var i = 0; i < 6; i++)
+            @for (int i = 0; i < 6; i++)
             {
-                <li class="span2 gallery-item" data-id="id-1" data-type="illustration">
-                    <a asp-controller="BooksDescription" asp-action="BooksDescription"><img src="~/img/Sherlock.jpg" alt="Gallery"></a>
-                    <span class="project-details"><a asp-controller="BooksDescription" asp-action="BooksDescription">Шерлок Холмс</a>Казнь Шерлока Холмса</span>
-                </li>
+                @foreach (BooksCategories item in ViewBag.popularBooks)
+                {
+                    <li class="span2 gallery-item">
+                        <a asp-controller="BooksDescription" asp-action="BooksDescription" asp-route-IdBook="@item.IdBook">
+                            @*
+                                asp-append-version: если имеет значение true, то к пути к файлу скрипта добавляется номер версии
+                                Без него не прогружается Image, хоть путь и правильный
+                            *@
+                            <img asp-append-version="true" src="@item.ImagePath" alt="Gallery">
+                        </a>
+                        <span class="project-details">
+                            <a asp-controller="BooksDescription" asp-action="BooksDescription" asp-route-IdAuthor="@item.IdAuthor">@item.AuthorFullName</a>
+                        @item.BookName </span>
+                    </li>
+                }
             }
+
+            @*@for (var i = 0; i < 6; i++)
+                {
+                    <li class="span2 gallery-item" >
+                        <a asp-controller="BooksDescription" asp-action="BooksDescription"><img src="~/img/Sherlock.jpg" alt="Gallery"></a>
+                        <span class="project-details"><a asp-controller="BooksDescription" asp-action="BooksDescription">Шерлок Холмс</a>Казнь Шерлока Холмса</span>
+                    </li>
+                }*@
         </ul>
         <h5><a asp-controller="BooksCategories" asp-action="BooksCategories" class="pull-right"><i class="icon-th"></i>Полностью</a></h5>
     </div>
@@ -29,7 +49,7 @@
         <ul class="gallery-post-grid holder">
             @for (var i = 0; i < 6; i++)
             {
-                <li class="span2 gallery-item" data-id="id-1" data-type="illustration">
+                <li class="span2 gallery-item">
                     <a asp-controller="BooksDescription" asp-action="BooksDescription"><img src="~/img/Sherlock.jpg" alt="Gallery"></a>
                     <span class="project-details"><a asp-controller="BooksDescription" asp-action="BooksDescription">Шерлок Холмс</a>Казнь Шерлока Холмса</span>
                 </li>

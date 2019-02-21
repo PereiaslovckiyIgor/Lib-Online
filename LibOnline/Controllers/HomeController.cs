@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using LibOnline.Models;
 using LibOnline.Models.Categories;
 using Microsoft.EntityFrameworkCore;
+using LibOnline.Models.BooksCategories;
 
 namespace LibOnline.Controllers
 {
@@ -15,6 +16,13 @@ namespace LibOnline.Controllers
 
         public IActionResult Index()
         {
+            List<BooksCategories> populars = new List<BooksCategories>();
+            using (ApplicationContext db = new ApplicationContext())
+                populars = db.booksCategories.FromSql("EXECUTE [books].[GetPopularBooksByRating]").ToList();
+
+
+
+            ViewBag.popularBooks = populars;
             return View();
         }//Index
 
@@ -23,7 +31,7 @@ namespace LibOnline.Controllers
         {
             List<AllCategories> list = new List<AllCategories>();
             using (ApplicationContext db = new ApplicationContext())
-                list = db.AllCategories.FromSql("EXECUTE [general].[GetAllCategories]").ToList();
+                list = db.allCategories.FromSql("EXECUTE [general].[GetAllCategories]").ToList();
 
             return Json(list);
         }//GetAllCategories
