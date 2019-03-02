@@ -8,25 +8,28 @@ using LibOnline.Models;
 using LibOnline.Models.Categories;
 using Microsoft.EntityFrameworkCore;
 using LibOnline.Models.BooksCategories;
+using System.Data.SqlClient;
 
 namespace LibOnline.Controllers
 {
     public class HomeController : Controller
     {
-
+        // Начальная инициализация страницы
+        // Состоит из 3 частей: Популярние книги, Новые книги, Недавно добавленные книги
         public IActionResult Index()
         {
-            List<BooksCategories> populars = new List<BooksCategories>();
-            using (ApplicationContext db = new ApplicationContext())
-                populars = db.booksCategories.FromSql("EXECUTE [books].[GetPopularBooksByRating]").ToList();
+
+            var populars = getPopulars();
+            var newBooks = getNewBooks();
 
 
+            ViewBag.popularBooks = BooksGrouping(populars);
+            ViewBag.newBooks = BooksGrouping(newBooks);
 
-            ViewBag.popularBooks = populars;
             return View();
         }//Index
 
-
+        // Получит все жанры книг
         public JsonResult GetAllCategories()
         {
             List<AllCategories> list = new List<AllCategories>();
@@ -36,6 +39,49 @@ namespace LibOnline.Controllers
             return Json(list);
         }//GetAllCategories
 
+
+
+        // Вспомготальный метод. Нужен для добавления автора в книгу, в том случае, если авторов несколько.
+        // В MS SQL возникает проблема со связью 1 ко многим(1 книга, несколько авторов) и проиходит дублирование данных
+        private List<BooksCatogoriesToShow> BooksGrouping(List<BooksCategories> populars) {
+
+            List<BooksCatogoriesToShow> booksToShow = new List<BooksCatogoriesToShow>();
+
+            foreach (var item in populars)
+            {
+                int tmpBookIndex = booksToShow.FindIndex(i => i.IdBook == item.IdBook);
+
+                if (tmpBookIndex == -1)
+                    booksToShow.Add(new BooksCatogoriesToShow(item));
+                else
+                (booksToShow.Find(i => i.IdBook == item.IdBook)).AddAuthor(item.IdAuthor, item.AuthorFullName);
+            }//foreach
+
+
+            return booksToShow;
+        }//BooksGrouping
+
+
+        private List<BooksCategories> getPopulars() {
+            List<BooksCategories> populars = new List<BooksCategories>();
+
+            using (ApplicationContext db = new ApplicationContext())
+                populars = db.booksCategories.FromSql("EXECUTE [books].[GetPopularBooksByRating]").ToList();
+
+
+            return populars;
+        }
+
+
+        private List<BooksCategories> getNewBooks()
+        {
+            List<BooksCategories> newBooks = new List<BooksCategories>();
+
+            using (ApplicationContext db = new ApplicationContext())
+                newBooks = db.booksCategories.FromSql("EXECUTE [books].[GetNewBooksByReleasedDate]").ToList();
+
+            return newBooks;
+        }
 
         public IActionResult About()
         {
