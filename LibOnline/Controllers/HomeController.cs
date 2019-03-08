@@ -18,20 +18,8 @@ namespace LibOnline.Controllers
         // Состоит из 3 частей: Популярние книги, Новые книги, Недавно добавленные книги
         public IActionResult Index()
         {
-
-            var populars = getPopulars();
-            //var newBooks = getNewBooks();
-
-
-            List<BooksCatogoriesToShow> popularBooks = new List<BooksCatogoriesToShow>();
-            foreach (var item in populars)
-            {
-                popularBooks.Add(new BooksCatogoriesToShow(item));
-
-            }//foreach
-
-            ViewBag.popularBooks = popularBooks;
-            ViewBag.newBooks = popularBooks;
+            ViewBag.popularBooks = getPopulars();
+            ViewBag.newBooks = getNewBooks();
 
             return View();
         }//Index
@@ -47,26 +35,35 @@ namespace LibOnline.Controllers
         }//GetAllCategories
 
 
+        //  Популярные книги 
+        private List<BooksCatogoriesToShow> getPopulars() {
 
-        private List<BooksCategories> getPopulars() {
             List<BooksCategories> populars = new List<BooksCategories>();
+            List<BooksCatogoriesToShow> books = new List<BooksCatogoriesToShow>();
+
 
             using (ApplicationContext db = new ApplicationContext())
                 populars = db.booksCategories.FromSql("EXECUTE [books].[GetPopularBooksByRating]").ToList();
 
-            return populars;
-        }
+            populars.ForEach(item => books.Add(new BooksCatogoriesToShow(item)));
+
+            return books;
+        }//getPopulars
 
 
-        private List<BooksCategories> getNewBooks()
+        // Новые книги по дате выпуска
+        private List<BooksCatogoriesToShow> getNewBooks()
         {
             List<BooksCategories> newBooks = new List<BooksCategories>();
+            List<BooksCatogoriesToShow> books = new List<BooksCatogoriesToShow>();
 
             using (ApplicationContext db = new ApplicationContext())
                 newBooks = db.booksCategories.FromSql("EXECUTE [books].[GetNewBooksByReleasedDate]").ToList();
 
-            return newBooks;
-        }
+            newBooks.ForEach(item => books.Add(new BooksCatogoriesToShow(item)));
+
+            return books;
+        }//getNewBooks
 
         public IActionResult About()
         {
