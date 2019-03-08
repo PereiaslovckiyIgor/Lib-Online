@@ -22,7 +22,6 @@
             // Для обращение к методам одного контроллера из любого друго
             url: '@Url.Content("~/Home/GetAllCategories")',
             success: function (result) {
-                debugger;
                 RenderCategoriesList(result);
             },
         });

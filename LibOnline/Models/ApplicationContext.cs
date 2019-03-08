@@ -18,7 +18,7 @@ namespace LibOnline.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server = IGORPC\MSSQL_IGOR; Database = LibOnline; User ID = sa; Password = 793638bujhm");
+            optionsBuilder.UseSqlServer(@"Server = IGORPC\MSSQL_IGOR; Database = LibOnline; User ID = sa; Password = 793638bujhm; MultipleActiveResultSets=true;");
         }//OnConfiguring
 
 

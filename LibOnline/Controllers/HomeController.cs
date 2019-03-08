@@ -20,11 +20,18 @@ namespace LibOnline.Controllers
         {
 
             var populars = getPopulars();
-            var newBooks = getNewBooks();
+            //var newBooks = getNewBooks();
 
 
-            ViewBag.popularBooks = BooksGrouping(populars);
-            ViewBag.newBooks = BooksGrouping(newBooks);
+            List<BooksCatogoriesToShow> popularBooks = new List<BooksCatogoriesToShow>();
+            foreach (var item in populars)
+            {
+                popularBooks.Add(new BooksCatogoriesToShow(item));
+
+            }//foreach
+
+            ViewBag.popularBooks = popularBooks;
+            ViewBag.newBooks = popularBooks;
 
             return View();
         }//Index
@@ -41,33 +48,11 @@ namespace LibOnline.Controllers
 
 
 
-        // Вспомготальный метод. Нужен для добавления автора в книгу, в том случае, если авторов несколько.
-        // В MS SQL возникает проблема со связью 1 ко многим(1 книга, несколько авторов) и проиходит дублирование данных
-        private List<BooksCatogoriesToShow> BooksGrouping(List<BooksCategories> populars) {
-
-            List<BooksCatogoriesToShow> booksToShow = new List<BooksCatogoriesToShow>();
-
-            foreach (var item in populars)
-            {
-                int tmpBookIndex = booksToShow.FindIndex(i => i.IdBook == item.IdBook);
-
-                if (tmpBookIndex == -1)
-                    booksToShow.Add(new BooksCatogoriesToShow(item));
-                else
-                (booksToShow.Find(i => i.IdBook == item.IdBook)).AddAuthor(item.IdAuthor, item.AuthorFullName);
-            }//foreach
-
-
-            return booksToShow;
-        }//BooksGrouping
-
-
         private List<BooksCategories> getPopulars() {
             List<BooksCategories> populars = new List<BooksCategories>();
 
             using (ApplicationContext db = new ApplicationContext())
                 populars = db.booksCategories.FromSql("EXECUTE [books].[GetPopularBooksByRating]").ToList();
-
 
             return populars;
         }

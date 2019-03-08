@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using LibOnline.Models.Authors;
+using System.Xml;
 
 namespace LibOnline.Models.BooksCategories
 {
@@ -12,8 +13,9 @@ namespace LibOnline.Models.BooksCategories
         [Key]
         public int IdBook { get; set; }
         public string BookName { get; set; }
-        public int IdAuthor { get; set; }
-        public string AuthorFullName { get; set; }
+        public string AuthorsInfo { get; set; }
+        //public int IdAuthor { get; set; }
+        //public string AuthorFullName { get; set; }
         public int RatingValue { get; set; }
         public string ImagePath { get; set; }
 
@@ -32,18 +34,39 @@ namespace LibOnline.Models.BooksCategories
 
         public BooksCatogoriesToShow(BooksCategories item)
         {
-            BookAuthors = new List<Author>();
+            BookAuthors = AuthorsFromXML(item.AuthorsInfo);
 
             IdBook = item.IdBook;
             BookName = item.BookName;
             RatingValue = item.RatingValue;
             ImagePath = item.ImagePath;
-            BookAuthors.Add(new Author(item.IdAuthor, item.AuthorFullName));
         }//c-tor
 
-        public void AddAuthor(int IdAuthor, string AuthorFullName) {
+        public void AddAuthor(int IdAuthor, string AuthorFullName)
+        {
             BookAuthors.Add(new Author(IdAuthor, AuthorFullName));
         }//AddAuthor
+
+
+        private List<Author> AuthorsFromXML(string xmlAuthorsInfo) {
+            List<Author> authors = new List<Author>();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml("<xml>" + xmlAuthorsInfo + "</xml>");
+
+            XmlNodeList authorsInfo = xmlDoc.GetElementsByTagName("author");
+
+            int id;
+            string fullName;
+            foreach (XmlNode xn in authorsInfo)
+            {
+                id = int.Parse(xn["IdAuthor"].InnerText);
+                fullName = xn["AuthorFullName"].InnerText;
+                authors.Add(new Author(id, fullName));
+            }//foreach
+
+            return authors;
+        }//AuthorsFromXML
 
     }//BooksCatogoriesToShow
 }
